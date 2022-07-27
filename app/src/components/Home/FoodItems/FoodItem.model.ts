@@ -1,7 +1,11 @@
 export type foodItemType = {
   name: string
   eta: string
-  ImageSRC: string
+  image_url: string
+  price: string
+  review_count: string
+  rating: string
+  categories: string
 }
 
 export interface FoodItemProps {
@@ -12,4 +16,5 @@ export interface FoodItemProps {
 
 export interface FoodItemsProps {
   foodItems: Array<foodItemType>
+  navigation: any
 }

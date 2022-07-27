@@ -1,10 +1,10 @@
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import React from 'react'
 
 import { RestaurantDetail } from '../components/RestaurantDetails/RestaurantDetail/RestaurantDetail'
 import { BottomNav } from '../components/BottomNav/BottomNav'
 
-export default function restaurantDetails() {
+export default function RestaurantDetails() {
   return (
     <Container>
       <Wrap>

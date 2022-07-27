@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import React from 'react'
 import { MenuItem } from './MenuItem/MenuItem'
 import { MenuItemsProps } from './MenuItems.model'

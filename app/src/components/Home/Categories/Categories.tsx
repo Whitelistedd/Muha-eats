@@ -1,13 +1,10 @@
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import React, { useEffect, useState } from 'react'
 import { Category } from './Category/Category'
 import { client, urlFor } from '../../../SanityClient'
 import { CategoriesProps } from './Categories.model'
 
-export const Categories: React.FC<CategoriesProps> = ({
-  category,
-  setCategory,
-}) => {
+export const Categories: React.FC<CategoriesProps> = ({ setCategory }) => {
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
@@ -42,7 +39,7 @@ export const Categories: React.FC<CategoriesProps> = ({
 const ScrollWrap = styled.ScrollView`
   display: flex;
   flex-direction: row;
-  background: ${({ theme }) => theme.secondaryBg};
+  background-color: ${({ theme }) => theme.secondaryBg};
   margin-top: 10px;
   margin-left: -10px;
 `

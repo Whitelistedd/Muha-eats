@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import { useEffect } from 'react'
 import { YELP_KEY } from '@env'
 import axios from 'axios'
@@ -45,7 +45,6 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
     fetchRestaurants()
-    console.log(category.replace(' ', ''))
   }, [search, filter, category])
 
   return (
@@ -66,7 +65,11 @@ export default function Home({ navigation }) {
         </Header>
         <FoodContainer>
           <Categories setCategory={setCategory} category={category} />
-          {!loading ? <FoodItems foodItems={foodItems} /> : <Loading />}
+          {!loading ? (
+            <FoodItems navigation={navigation} foodItems={foodItems} />
+          ) : (
+            <Loading />
+          )}
         </FoodContainer>
       </Wrap>
       <BottomNav />

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import React from 'react'
 import { Devider } from '../../Devider/Devider'
 import { MenuItems } from '../MenuItems/MenuItems'

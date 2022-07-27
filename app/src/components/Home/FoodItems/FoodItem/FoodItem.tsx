@@ -1,5 +1,5 @@
 import { HeartIcon } from 'react-native-heroicons/outline'
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import React from 'react'
 import { FoodItemProps } from '../FoodItem.model'
 import { TouchableOpacity } from 'react-native'

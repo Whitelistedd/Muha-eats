@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import React from 'react'
 import {
   HomeIcon,
@@ -64,5 +64,5 @@ const Container = styled.View`
   bottom: 30px;
   padding: 5px 10px;
   flex-direction: row;
-  background: ${({ theme }) => theme.bg};
+  background-color: ${({ theme }) => theme.bg};
 `
