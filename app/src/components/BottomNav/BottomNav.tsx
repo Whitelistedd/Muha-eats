@@ -56,13 +56,10 @@ const NavItem = styled.View`
 
 const Container = styled.View`
   width: 100%;
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  position: absolute;
-  bottom: 30px;
-  padding: 5px 10px;
   flex-direction: row;
   background-color: ${({ theme }) => theme.bg};
+  margin: 10px 0px;
 `

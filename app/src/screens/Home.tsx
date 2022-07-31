@@ -1,49 +1,38 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/native'
 import { useEffect } from 'react'
-import { YELP_KEY } from '@env'
-import axios from 'axios'
 
 import { SearchBar } from '../components/Home/SearchBar/SearchBar'
 import { Categories } from '../components/Home/Categories/Categories'
 import { BottomNav } from '../components/BottomNav/BottomNav'
-import { FoodItems } from '../components/Home/FoodItems/FoodItems'
+import { RestaurantItems } from '../components/Home/RestaurantItems/RestaurantItems'
 import { Loading } from '../components/Loading/Loading'
-import { foodItemType } from '../components/Home/FoodItems/FoodItem.model'
+import { restaurantsType } from '../components/Home/RestaurantItems/RestaurantItems.model'
+import { Selections } from '../components/Home/Selections/Selections'
+import { client } from '../SanityClient'
 
 export default function Home({ navigation }) {
-  const [foodItems, setFoodItems] = useState<foodItemType[]>([])
+  const [restaurants, setRestaurants] = useState<restaurantsType[]>([])
   const [search, setSearch] = useState('NYC')
   const [filter, setFilter] = useState('delivery')
   const [category, setCategory] = useState('FastFood')
-  const [loading, setLoading] = useState(false)
-
-  const fetchRestaurants = async () => {
-    try {
-      setLoading(true)
-      const response = await axios.get(
-        `https://api.yelp.com/v3/businesses/search?term=${category}&location=${
-          search ? search : 'NYC'
-        }`,
-        { headers: { Authorization: `Bearer ${YELP_KEY}` } }
-      )
-      if (!response) return
-      setLoading(false)
-      setFoodItems(
-        response.data.businesses.filter((business) =>
-          business.transactions.includes(filter)
-        )
-      )
-    } catch (err) {
-      console.log(err.response)
-    }
-  }
-
-  const handleFilter = (filterType: string) => {
-    setFilter(filterType)
-  }
+  const [fetching, setFetching] = useState(false)
 
   useEffect(() => {
+    setFetching(true)
+    const fetchRestaurants = async () => {
+      try {
+        let Restaurantquery =
+          "*[_type == 'restaurants'] {name, mainImage,eta,menuItems,categories}"
+        const response = await client.fetch(Restaurantquery)
+        setRestaurants(
+          response.filter((data) => data.categories.includes(category))
+        )
+        setFetching(false)
+      } catch (err) {
+        console.log(err)
+      }
+    }
     fetchRestaurants()
   }, [search, filter, category])
 
@@ -51,28 +40,26 @@ export default function Home({ navigation }) {
     <Container>
       <Wrap>
         <Header>
-          <Selections>
-            <Selection onPress={() => handleFilter('delivery')} filter={filter}>
-              <Delivery filter={filter}>Delivery</Delivery>
-            </Selection>
-            <Selection onPress={() => handleFilter('pickup')} filter={filter}>
-              <PickUp filter={filter}>PickUp</PickUp>
-            </Selection>
-          </Selections>
+          <Selections filter={filter} setFilter={setFilter} />
           <SearchBarWrap>
             <SearchBar setSearch={setSearch} search={search} />
           </SearchBarWrap>
         </Header>
-        <FoodContainer>
-          <Categories setCategory={setCategory} category={category} />
-          {!loading ? (
-            <FoodItems navigation={navigation} foodItems={foodItems} />
-          ) : (
-            <Loading />
-          )}
-        </FoodContainer>
+        <Body>
+          <FoodContainer>
+            <Categories setCategory={setCategory} category={category} />
+            {!fetching ? (
+              <RestaurantItems
+                navigation={navigation}
+                restaurants={restaurants}
+              />
+            ) : (
+              <Loading />
+            )}
+          </FoodContainer>
+        </Body>
+        <BottomNav />
       </Wrap>
-      <BottomNav />
     </Container>
   )
 }
@@ -80,48 +67,18 @@ export default function Home({ navigation }) {
 const FoodContainer = styled.ScrollView`
   display: flex;
   max-height: 100%;
-  margin-bottom: 60px;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.bg};
+  background-color: transparent;
+`
+
+const Body = styled.ScrollView`
+  height: 100%;
+  width: 100%;
+  background-color: ${({ theme }) => theme.secondaryBg};
 `
 
 const SearchBarWrap = styled.View`
   padding-bottom: 15px;
-`
-
-const Selection = styled.TouchableOpacity<{ filter: string }>`
-  border-radius: 50px;
-  overflow: hidden;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  margin-left: 10px;
-  justify-content: center;
-`
-
-const Delivery = styled.Text<{ filter: string }>`
-  background-color: ${({ filter }) =>
-    filter === 'delivery' ? 'black' : 'white'};
-  color: ${({ filter }) => (filter === 'delivery' ? 'white' : 'black')};
-  font-weight: 700;
-  padding: 5px 15px;
-  font-size: 12px;
-`
-
-const PickUp = styled(Delivery)<{ filter: string }>`
-  background-color: ${({ filter }) =>
-    filter === 'pickup' ? 'black' : 'white'};
-  color: ${({ filter }) => (filter === 'pickup' ? 'white' : 'black')};
-`
-
-const Selections = styled.View`
-  display: flex;
-  flex-direction: row;
-  margin-right: -10px;
-  height: 50px;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
 `
 
 const Header = styled.View`
@@ -138,9 +95,5 @@ const Container = styled.SafeAreaView`
   padding: 0px 10px;
   height: 100%;
   flex: 1;
-  background-color: #ededed;
-
-  * {
-    box-sizing: border-box;
-  }
+  background-color: ${({ theme }) => theme.bg};
 `

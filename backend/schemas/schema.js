@@ -5,13 +5,13 @@ import createSchema from 'part:@sanity/base/schema-creator'
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 
 // We import object and document schemas
-import food from './food'
+import restaurants from './restaurants'
 import category from './category'
 
 export default createSchema({
   name: 'default',
   types: schemaTypes.concat([
-    food,
+    restaurants,
     category,
   ]),
 })
