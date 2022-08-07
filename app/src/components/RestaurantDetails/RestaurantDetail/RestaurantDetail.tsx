@@ -10,7 +10,20 @@ export const RestaurantDetail: React.FC<RestaurantDetailProps> = ({
   return (
     <Container>
       <Wrap source={{ uri: image }} resizeMode="cover">
-        <Title>{name}</Title>
+        <Title
+          style={[
+            {
+              shadowOffset: {
+                width: 0,
+                height: 0,
+              },
+              shadowOpacity: 1,
+              shadowRadius: 5,
+            },
+          ]}
+        >
+          {name}
+        </Title>
       </Wrap>
     </Container>
   )
@@ -20,6 +33,7 @@ const Title = styled.Text`
   font-size: 30px;
   color: white;
   font-weight: 700;
+  text-shadow: 0px 0px 0px black;
   padding: 10px 10px 5px 10px;
 `
 

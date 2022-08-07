@@ -5,6 +5,6 @@ export interface CategoryProps {
 }
 
 export interface CategoriesProps {
-  category: string
-  setCategory: (category: string) => void
+  selectedCategory: string
+  setSelectedCategory: (category: string) => void
 }

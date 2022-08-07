@@ -17,7 +17,18 @@ module.exports = {
       "whitelist": null,
       "safe": false,
       "allowUndefined": true,
+      "alias": {
+        "screens": './src'
+      }
     },
+    ],
+    [
+      'module-resolver',
+      {
+        alias: {
+          src: './src'
+        }
+      }
     ],
     'react-native-reanimated/plugin',
     "@babel/plugin-proposal-export-namespace-from"

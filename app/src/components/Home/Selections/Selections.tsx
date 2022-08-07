@@ -12,11 +12,11 @@ export const Selections: React.FC<SelectionsProps> = ({
 
   return (
     <Container>
-      <Selection onPress={() => handleFilter('delivery')} filter={filter}>
-        <Delivery filter={filter}>Delivery</Delivery>
+      <Selection onPress={() => handleFilter('Доставка')} filter={filter}>
+        <Delivery filter={filter}>Доставка</Delivery>
       </Selection>
-      <Selection onPress={() => handleFilter('pickup')} filter={filter}>
-        <PickUp filter={filter}>PickUp</PickUp>
+      <Selection onPress={() => handleFilter('Навынос')} filter={filter}>
+        <PickUp filter={filter}>Навынос</PickUp>
       </Selection>
     </Container>
   )
@@ -34,8 +34,8 @@ const Selection = styled.TouchableOpacity<{ filter: string }>`
 
 const Delivery = styled.Text<{ filter: string }>`
   background-color: ${({ filter }) =>
-    filter === 'delivery' ? 'black' : 'white'};
-  color: ${({ filter }) => (filter === 'delivery' ? 'white' : 'black')};
+    filter === 'Доставка' ? 'black' : 'white'};
+  color: ${({ filter }) => (filter === 'Доставка' ? 'white' : 'black')};
   font-weight: 700;
   padding: 5px 15px;
   font-size: 12px;
@@ -43,8 +43,8 @@ const Delivery = styled.Text<{ filter: string }>`
 
 const PickUp = styled(Delivery)<{ filter: string }>`
   background-color: ${({ filter }) =>
-    filter === 'pickup' ? 'black' : 'white'};
-  color: ${({ filter }) => (filter === 'pickup' ? 'white' : 'black')};
+    filter === 'Навынос' ? 'black' : 'white'};
+  color: ${({ filter }) => (filter === 'Навынос' ? 'white' : 'black')};
 `
 
 const Container = styled.View`

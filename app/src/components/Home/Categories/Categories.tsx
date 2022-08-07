@@ -4,7 +4,10 @@ import { Category } from './Category/Category'
 import { client, urlFor } from '../../../SanityClient'
 import { CategoriesProps } from './Categories.model'
 
-export const Categories: React.FC<CategoriesProps> = ({ setCategory }) => {
+export const Categories: React.FC<CategoriesProps> = ({
+  selectedCategory,
+  setSelectedCategory,
+}) => {
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
@@ -17,7 +20,9 @@ export const Categories: React.FC<CategoriesProps> = ({ setCategory }) => {
   }, [])
 
   const handleCategoryChange = (category: string) => {
-    setCategory(category)
+    selectedCategory === category
+      ? setSelectedCategory('')
+      : setSelectedCategory(category)
   }
 
   return (
@@ -44,4 +49,6 @@ const ScrollWrap = styled.ScrollView`
   margin-left: -10px;
 `
 
-const Container = styled.View``
+const Container = styled.View`
+  padding-left: 10px;
+`

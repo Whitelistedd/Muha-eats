@@ -3,45 +3,39 @@ import React from 'react'
 import {
   HomeIcon,
   ReceiptTaxIcon,
-  SearchIcon,
   ShoppingBagIcon,
   UserCircleIcon,
 } from 'react-native-heroicons/solid'
 import { TouchableOpacity } from 'react-native'
+import { BottomNavProps } from './BottomNav.model'
+import { TouchableHighlight } from 'react-native-gesture-handler'
 
-export const BottomNav: React.FC = () => {
+const BottomNavList = [
+  { name: 'Home', icon: <HomeIcon color={'black'} /> },
+  { name: 'Orders', icon: <ReceiptTaxIcon color={'black'} /> },
+  { name: 'Cart', icon: <ShoppingBagIcon color={'black'} /> },
+  { name: 'Account', icon: <UserCircleIcon color={'black'} /> },
+]
+
+export const BottomNav: React.FC<BottomNavProps> = ({
+  className,
+  navigation,
+}) => {
   return (
-    <Container>
-      <TouchableOpacity>
-        <NavItem>
-          <HomeIcon size={30} color={'black'} />
-          <Title>Home</Title>
-        </NavItem>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <NavItem>
-          <SearchIcon size={30} color={'black'} />
-          <Title>Browse</Title>
-        </NavItem>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <NavItem>
-          <ShoppingBagIcon size={30} color={'black'} />
-          <Title>Grocery</Title>
-        </NavItem>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <NavItem>
-          <ReceiptTaxIcon size={30} color={'black'} />
-          <Title>Orders</Title>
-        </NavItem>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <NavItem>
-          <UserCircleIcon size={30} color={'black'} />
-          <Title>Account</Title>
-        </NavItem>
-      </TouchableOpacity>
+    <Container className={className}>
+      {BottomNavList.map((navItem, index) => (
+        <TouchableHighlight
+          onPress={() => {
+            navigation.navigate(`${navItem.name}`)
+          }}
+          key={`bottom-nav-number-${index}`}
+        >
+          <NavItem>
+            {navItem.icon}
+            <Title>{navItem.name}</Title>
+          </NavItem>
+        </TouchableHighlight>
+      ))}
     </Container>
   )
 }
@@ -61,5 +55,4 @@ const Container = styled.View`
   justify-content: space-around;
   flex-direction: row;
   background-color: ${({ theme }) => theme.bg};
-  margin: 10px 0px;
 `
