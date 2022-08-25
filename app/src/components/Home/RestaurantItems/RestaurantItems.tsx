@@ -3,8 +3,7 @@ import React from 'react'
 
 import { RestaurantItemsProps } from './RestaurantItems.model'
 import { RestaurantItem } from './RestaurantItem/RestaurantItem'
-import { TouchableHighlight } from 'react-native-gesture-handler'
-import { urlFor } from '../../../SanityClient'
+import { urlFor } from 'src/SanityClient'
 import { TouchableOpacity } from 'react-native'
 
 export const RestaurantItems: React.FC<RestaurantItemsProps> = ({

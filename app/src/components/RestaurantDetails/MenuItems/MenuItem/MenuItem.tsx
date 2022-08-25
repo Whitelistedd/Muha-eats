@@ -1,8 +1,8 @@
 import styled from 'styled-components/native'
-import React from 'react'
-import { MenuItemProps } from '../MenuItems.model'
-import { AppDispatch } from 'src/redux/store/store'
-import { addProduct } from 'src/redux/Slices/Cart/CartSlice'
+import React, { useEffect, useState } from 'react'
+import { MenuItemProps, MenuItemType } from '../MenuItems.model'
+import { AppDispatch, useAppSelector } from 'src/redux/store/store'
+import { addProduct, removeProduct } from 'src/redux/Slices/Cart/CartSlice'
 
 export const MenuItem: React.FC<MenuItemProps> = ({
   id,
@@ -11,54 +11,99 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   ImageSRC,
 }) => {
   const dispatch = AppDispatch()
+  const cartItems = useAppSelector((state) => state.cartItems)
+  const [quantity, setQauntity] = useState(0)
 
-  const handleAddItem = (item) => {
+  const handleAddItem = (item: MenuItemType) => {
     dispatch(addProduct(item))
+    setQauntity((prev) => prev + 1)
   }
 
-  console.log(id)
+  const handleRemoveItem = (item: MenuItemType) => {
+    if (quantity !== 0) {
+      dispatch(removeProduct(item))
+      setQauntity((prev) => prev - 1)
+    }
+  }
+
+  useEffect(() => {
+    console.log(cartItems)
+  }, [cartItems])
 
   return (
     <Container>
       <About>
         <Image source={{ uri: ImageSRC }} />
-        <Price>{price}₽</Price>
         <Name>{name}</Name>
       </About>
-      <TouchableOpacity>
-        <Button>
-          <AddIcon source={require('src/assets/icons/add.png')} />
-          <Text>Добавить</Text>
-        </Button>
-      </TouchableOpacity>
+      {quantity === 0 ? (
+        <AddItemButton
+          onPress={() => {
+            handleAddItem({ id, name, price, ImageSRC })
+          }}
+        >
+          <PriceWrap>
+            <Price>{price} ₽</Price>
+          </PriceWrap>
+        </AddItemButton>
+      ) : (
+        <QuantityContainer>
+          <QuantityButton
+            onPress={() => {
+              handleRemoveItem({ id, name, price, ImageSRC })
+            }}
+          >
+            <QuantityWrap>
+              <QuantityIcons source={require('src/assets/icons/minus.png')} />
+            </QuantityWrap>
+          </QuantityButton>
+          <Quantity>{quantity}</Quantity>
+          <QuantityButton
+            onPress={() => {
+              handleAddItem({ id, name, price, ImageSRC })
+            }}
+          >
+            <QuantityWrap>
+              <QuantityIcons source={require('src/assets/icons/add.png')} />
+            </QuantityWrap>
+          </QuantityButton>
+        </QuantityContainer>
+      )}
     </Container>
   )
 }
 
-const AddIcon = styled.Image`
-  width: 13px;
-  height: 13px;
-  margin-right: 5px;
+const QuantityIcons = styled.Image`
+  width: 20px;
+  height: 16px;
 `
 
-const Text = styled.Text`
-  font-size: 13px;
-  text-align: center;
-`
-
-const Button = styled.View`
+const PriceWrap = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 `
 
-const TouchableOpacity = styled.TouchableOpacity`
+const QuantityWrap = styled(PriceWrap)`
+  background-color: white;
+  padding: 16px;
+  border-radius: 17px;
+`
+
+const AddItemButton = styled.TouchableOpacity`
   width: 100%;
   padding: 5px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   background-color: white;
   border-radius: 17px;
 `
+
+const QuantityButton = styled.TouchableOpacity``
 
 const Image = styled.Image`
   width: 100%;
@@ -69,15 +114,28 @@ const Image = styled.Image`
 `
 
 const Price = styled.Text`
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 17px;
   margin: 5px 0px;
   padding: 0px 5px;
 `
 
+const Quantity = styled(Price)``
+
+const QuantityContainer = styled.View`
+  width: 100%;
+  padding: 5px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 17px;
+`
+
 const Name = styled.Text`
-  font-size: 11px;
   padding: 0px 5px;
+  font-size: 14px;
+  margin: 5px 0px;
 `
 
 const About = styled.View`

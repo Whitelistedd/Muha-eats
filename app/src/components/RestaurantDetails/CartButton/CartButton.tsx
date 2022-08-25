@@ -1,13 +1,14 @@
-import styled from 'styled-components'
+import styled from 'styled-components/native'
+import React from 'react'
 
 export const CartButton: React.FC = () => {
   return (
     <Container>
-      <Wrap></Wrap>
+      <Text></Text>
     </Container>
   )
 }
 
-const Wrap = styled.div``
+const Text = styled.Text``
 
-const Container = styled.div``
+const Container = styled.View``

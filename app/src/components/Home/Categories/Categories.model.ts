@@ -1,3 +1,10 @@
+import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+
+export type category = {
+  mainImage: SanityImageSource
+  name: string
+}
+
 export interface CategoryProps {
   ImageSRC: string
   name: string

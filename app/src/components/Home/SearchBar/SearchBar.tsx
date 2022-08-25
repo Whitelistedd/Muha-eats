@@ -7,10 +7,10 @@ import {
 } from 'react-native-heroicons/solid'
 import { SearchBarProps } from './SearchBar.model'
 
-export const SearchBar: React.FC<SearchBarProps> = ({ search, setSearch }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({ setSearch }) => {
   const [SearchTerm, setSearchTerm] = useState('')
 
-  const handleOnChangeSearch = (text) => {
+  const handleOnChangeSearch = (text: string) => {
     setSearchTerm(text)
   }
 

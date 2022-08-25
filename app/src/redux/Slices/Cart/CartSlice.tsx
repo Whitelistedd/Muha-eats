@@ -16,13 +16,38 @@ const CartSlice = createSlice({
         (item) => item.id === action.payload.id
       )
       if (DuplicateItem) {
-        console.log(`a duplicate ${action.payload}`)
+        state.cartItems.forEach((item, index) => {
+          if (item.id === action.payload.id) {
+            state.cartItems[index] = {
+              ...state.cartItems[index],
+              quantity: item.quantity + 1,
+            }
+          }
+        })
       } else {
-        console.log(`not a duplicate ${action.payload}`)
+        state.cartItems.push({ ...action.payload, quantity: 1 })
+        state.quantity += 1
+        state.total += action.payload.price
+        console.log(`not a duplicate `)
       }
+    },
+    removeProduct: (state, action) => {
+      const inCartItem = state.cartItems.find((item, itemIndex) => {
+        if (item.id === action.payload.id && item.quantity > 1) {
+          state.cartItems[itemIndex] = {
+            ...state.cartItems[itemIndex],
+            quantity: item.quantity - 1,
+          }
+        } else if (item.id === action.payload.id && item.quantity === 1) {
+          state.cartItems = state.cartItems.filter(
+            (item, index) => index !== itemIndex
+          )
+        }
+      })
+      console.log(inCartItem)
     },
   },
 })
 
-export const { addProduct } = CartSlice.actions
+export const { addProduct, removeProduct } = CartSlice.actions
 export default CartSlice.reducer

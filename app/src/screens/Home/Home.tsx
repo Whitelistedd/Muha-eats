@@ -12,6 +12,7 @@ import { Selections } from '../../components/Home/Selections/Selections'
 import { client } from '../../SanityClient'
 import { RefreshControl } from 'react-native'
 import { HomeProps } from './Home.model'
+import { themeType } from 'src/theme'
 
 const Home: React.FC<HomeProps> = ({ navigation }) => {
   const [restaurants, setRestaurants] = useState<restaurantsType[]>([])
@@ -65,7 +66,7 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
         <Header>
           <Selections filter={filter} setFilter={setFilter} />
           <SearchBarWrap>
-            <SearchBar setSearch={setSearch} search={search} />
+            <SearchBar setSearch={setSearch} />
           </SearchBarWrap>
         </Header>
         <Body
@@ -107,7 +108,7 @@ const FoodContainer = styled.View`
   background-color: transparent;
 `
 
-const Body = styled.ScrollView`
+const Body = styled.ScrollView<{ theme: themeType }>`
   height: 100%;
   width: 100%;
   background-color: ${({ theme }) => theme.secondaryBg};
@@ -117,17 +118,17 @@ const SearchBarWrap = styled.View`
   padding-bottom: 15px;
 `
 
-const Header = styled.View`
+const Header = styled.View<{ theme: themeType }>`
   background-color: ${({ theme }) => theme.secondaryBg};
 `
 
-const Wrap = styled.View`
+const Wrap = styled.View<{ theme: themeType }>`
   height: 100%;
   width: 100%;
   background-color: ${({ theme }) => theme.bg};
 `
 
-const Container = styled.SafeAreaView`
+const Container = styled.SafeAreaView<{ theme: themeType }>`
   padding: 0px 10px;
   height: 100%;
   flex: 1;

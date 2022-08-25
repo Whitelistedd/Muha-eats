@@ -12,7 +12,7 @@ export const MenuItems: React.FC<MenuItemsProps> = ({ MenuItemList }) => {
           {MenuItemList?.map((menuItem, index) => (
             <MenuItem
               key={`menuItem-number-${index}`}
-              id={menuItem.id}
+              id={menuItem['_key']}
               name={menuItem.foodName}
               price={menuItem.price}
               ImageSRC={urlFor(menuItem.foodImage).url()}

@@ -6,9 +6,9 @@ import {
   ShoppingBagIcon,
   UserCircleIcon,
 } from 'react-native-heroicons/solid'
-import { TouchableOpacity } from 'react-native'
 import { BottomNavProps } from './BottomNav.model'
 import { TouchableHighlight } from 'react-native-gesture-handler'
+import { themeType } from 'src/theme'
 
 const BottomNavList = [
   { name: 'Home', icon: <HomeIcon color={'black'} /> },
@@ -22,7 +22,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   navigation,
 }) => {
   return (
-    <Container className={className}>
+    <Container className={`${className}`}>
       {BottomNavList.map((navItem, index) => (
         <TouchableHighlight
           onPress={() => {
@@ -42,7 +42,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
 
 const Title = styled.Text``
 
-const NavItem = styled.View`
+const NavItem = styled.View<{ theme: themeType }>`
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.primaryFontColor};

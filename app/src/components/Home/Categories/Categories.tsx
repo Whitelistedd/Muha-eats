@@ -1,14 +1,15 @@
 import styled from 'styled-components/native'
 import React, { useEffect, useState } from 'react'
 import { Category } from './Category/Category'
-import { client, urlFor } from '../../../SanityClient'
-import { CategoriesProps } from './Categories.model'
+import { client, urlFor } from 'src/SanityClient'
+import { CategoriesProps, category } from './Categories.model'
+import { themeType } from 'src/theme'
 
 export const Categories: React.FC<CategoriesProps> = ({
   selectedCategory,
   setSelectedCategory,
 }) => {
-  const [categories, setCategories] = useState([])
+  const [categories, setCategories] = useState<category[]>([])
 
   useEffect(() => {
     const categoryQuery = '*[_type == "category"]'
@@ -41,7 +42,7 @@ export const Categories: React.FC<CategoriesProps> = ({
   )
 }
 
-const ScrollWrap = styled.ScrollView`
+const ScrollWrap = styled.ScrollView<{ theme: themeType }>`
   display: flex;
   flex-direction: row;
   background-color: ${({ theme }) => theme.secondaryBg};

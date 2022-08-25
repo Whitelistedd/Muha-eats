@@ -3,6 +3,7 @@ import React from 'react'
 
 import { BottomNav } from '../../components/BottomNav/BottomNav'
 import { OrdersProps } from './Orders.model'
+import { themeType } from 'src/theme'
 
 const Orders: React.FC<OrdersProps> = ({ navigation }) => {
   return (
@@ -20,13 +21,13 @@ const Nav = styled.View`
   padding-top: 20px;
 `
 
-const Wrap = styled.View`
+const Wrap = styled.View<{ theme: themeType }>`
   height: 100%;
   width: 100%;
   background-color: ${({ theme }) => theme.bg};
 `
 
-const Container = styled.SafeAreaView`
+const Container = styled.SafeAreaView<{ theme: themeType }>`
   padding: 0px 10px;
   height: 100%;
   flex: 1;

@@ -5,6 +5,7 @@ import { RestaurantDetail } from 'src/components/RestaurantDetails/RestaurantDet
 import { BottomNav } from 'src/components/BottomNav/BottomNav'
 import { MenuItems } from 'src/components/RestaurantDetails/MenuItems/MenuItems'
 import { RestaurantDetailsProps } from './RestaurantDetails.model'
+import { themeType } from 'src/theme'
 
 const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({
   route,
@@ -31,7 +32,7 @@ const Wrap = styled.View`
   height: 100%;
 `
 
-const Container = styled.View`
+const Container = styled.View<{ theme: themeType }>`
   height: 100%;
   background-color: ${({ theme }) => theme.bg};
 `

@@ -2,6 +2,7 @@ import { HeartIcon } from 'react-native-heroicons/outline'
 import styled from 'styled-components/native'
 import React from 'react'
 import { RestaurantItemProps } from '../RestaurantItems.model'
+import { themeType } from 'src/theme'
 
 export const RestaurantItem: React.FC<RestaurantItemProps> = ({
   name,
@@ -58,7 +59,7 @@ const ImageWrap = styled.View`
   position: relative;
 `
 
-const Container = styled.View`
+const Container = styled.View<{ theme: themeType }>`
   background-color: ${({ theme }) => theme.secondaryBg};
   flex: 1;
   width: 90%;

@@ -1,9 +1,10 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
-import Home from './src/screens/Home/Home'
 import React from 'react'
-import RestaurantDetails from './src/screens/RestaurantDetails/RestaurantDetails'
-import Orders from './src/screens/Orders/Orders'
+
+import Home from 'src/screens/Home/Home'
+import RestaurantDetails from 'src/screens/RestaurantDetails/RestaurantDetails'
+import Orders from 'src/screens/Orders/Orders'
 
 export default function RootNavigation() {
   const Stack = createStackNavigator()

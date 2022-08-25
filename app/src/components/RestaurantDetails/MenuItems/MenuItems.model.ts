@@ -1,7 +1,7 @@
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
 export type MenuItemType = {
-  id: string
+  _key: string
   foodImage: SanityImageSource
   foodName: string
   price: number
