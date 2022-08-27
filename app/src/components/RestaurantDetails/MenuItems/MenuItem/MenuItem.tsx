@@ -26,10 +26,6 @@ export const MenuItem: React.FC<MenuItemProps> = ({
     }
   }
 
-  useEffect(() => {
-    console.log(cartItems)
-  }, [cartItems])
-
   return (
     <Container>
       <About>

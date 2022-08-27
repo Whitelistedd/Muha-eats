@@ -48,4 +48,5 @@ const Container = styled.View`
   background-color: white;
   position: relative;
   top: -17px;
+  padding-bottom: 76px;
 `

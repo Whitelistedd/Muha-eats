@@ -22,6 +22,8 @@ const CartSlice = createSlice({
               ...state.cartItems[index],
               quantity: item.quantity + 1,
             }
+            state.quantity += 1
+            state.total += item.price
           }
         })
       } else {
@@ -38,10 +40,14 @@ const CartSlice = createSlice({
             ...state.cartItems[itemIndex],
             quantity: item.quantity - 1,
           }
+          state.quantity -= 1
+          state.total -= item.price
         } else if (item.id === action.payload.id && item.quantity === 1) {
           state.cartItems = state.cartItems.filter(
             (item, index) => index !== itemIndex
           )
+          state.quantity -= 1
+          state.total -= item.price
         }
       })
       console.log(inCartItem)
