@@ -7,14 +7,10 @@ export const CartButton: React.FC = () => {
   const cartTotal = useAppSelector((state) => state.total)
 
   return (
-    <>
-      {cartQuantity !== 0 && (
-        <Container>
-          <Text>В корзину {cartQuantity}</Text>
-          <Text>${cartTotal}</Text>
-        </Container>
-      )}
-    </>
+    <Container>
+      <Text>В корзину {cartQuantity}</Text>
+      <Text>${cartTotal}</Text>
+    </Container>
   )
 }
 
