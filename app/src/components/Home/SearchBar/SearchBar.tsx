@@ -21,7 +21,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({ setSearch }) => {
   return (
     <Container>
       <Search>
-        <SearchSVG size={20} />
         <SearchInput
           value={SearchTerm}
           placeholder="Search"
@@ -30,7 +29,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({ setSearch }) => {
         />
         <SearchButton onPress={handleSearch}>
           <SearchButtonView>
-            <ClockIcon size={13} color="black" />
             <SearchButtonTitle>Search</SearchButtonTitle>
           </SearchButtonView>
         </SearchButton>
@@ -62,14 +60,10 @@ const SearchButton = styled.TouchableOpacity`
   border-radius: 20px;
 `
 
-const SearchSVG = styled(LocationMarkerIcon)`
-  color: black;
-  margin-right: 5px;
-`
-
 const SearchInput = styled.TextInput`
   height: 30px;
   flex: 1;
+  padding: 0 0 0 5px;
 `
 
 const Search = styled.View`

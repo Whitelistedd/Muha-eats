@@ -7,6 +7,13 @@ export type MenuItemType = {
   price: number
 }
 
+export type FormatedMenuItemType = {
+  id: string
+  ImageSRC: string
+  name: string
+  price: number
+}
+
 export interface MenuItemsProps {
   MenuItemList: Array<MenuItemType>
 }

@@ -8,6 +8,7 @@ import { themeType } from 'src/theme'
 import { CartButton } from 'src/components/RestaurantDetails/CartButton/CartButton'
 import { useAppSelector } from 'src/redux/store/store'
 import { AnimationView } from 'src/components/AnimationView/AnimationView'
+import { GoBack } from 'src/components/GoBack/GoBack'
 
 const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({
   route,
@@ -20,12 +21,13 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({
   return (
     <Container>
       <Wrap>
+        <GoBack navigation={navigation} />
         <RestaurantDetail name={name} image={image} />
         <MenuItems MenuItemList={menuItems} />
         {cartQuantity !== 0 && (
-          <Cart cartQuantity={cartQuantity}>
+          <Cart>
             <AnimationView endValue={60} animation={'height'} duration={300}>
-              <CartButton />
+              <CartButton navigation={navigation} />
             </AnimationView>
           </Cart>
         )}
@@ -34,7 +36,7 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({
   )
 }
 
-const Cart = styled.SafeAreaView<{ theme: themeType; cartQuantity: number }>`
+const Cart = styled.SafeAreaView<{ theme: themeType }>`
   width: 100%;
   background-color: transparent;
   border-top: 1px solid grey;

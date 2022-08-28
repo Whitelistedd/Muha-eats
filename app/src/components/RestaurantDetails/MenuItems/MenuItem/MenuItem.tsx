@@ -1,8 +1,9 @@
 import styled from 'styled-components/native'
 import React, { useEffect, useState } from 'react'
-import { MenuItemProps, MenuItemType } from '../MenuItems.model'
+import { FormatedMenuItemType, MenuItemProps } from '../MenuItems.model'
 import { AppDispatch, useAppSelector } from 'src/redux/store/store'
 import { addProduct, removeProduct } from 'src/redux/Slices/Cart/CartSlice'
+import { QuantityView } from 'src/components/QuantityView/QuantityView'
 
 export const MenuItem: React.FC<MenuItemProps> = ({
   id,
@@ -10,19 +11,27 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   price,
   ImageSRC,
 }) => {
+  const [quantity, setQuantity] = useState(0)
   const dispatch = AppDispatch()
-  const cartItems = useAppSelector((state) => state.cartItems)
-  const [quantity, setQauntity] = useState(0)
+  const cartItemsList = useAppSelector((state) => state.cartItems)
 
-  const handleAddItem = (item: MenuItemType) => {
+  useEffect(() => {
+    const getQuantity = () => {
+      const item = cartItemsList.find((item) => item.id === id)
+      setQuantity(item ? item.quantity : 0)
+    }
+    getQuantity()
+  }, [])
+
+  const handleAddItem = (item: FormatedMenuItemType) => {
     dispatch(addProduct(item))
-    setQauntity((prev) => prev + 1)
+    setQuantity((prev) => prev + 1)
   }
 
-  const handleRemoveItem = (item: MenuItemType) => {
+  const handleRemoveItem = (item: FormatedMenuItemType) => {
     if (quantity !== 0) {
       dispatch(removeProduct(item))
-      setQauntity((prev) => prev - 1)
+      setQuantity((prev) => prev - 1)
     }
   }
 
@@ -43,48 +52,25 @@ export const MenuItem: React.FC<MenuItemProps> = ({
           </PriceWrap>
         </AddItemButton>
       ) : (
-        <QuantityContainer>
-          <QuantityButton
-            onPress={() => {
-              handleRemoveItem({ id, name, price, ImageSRC })
-            }}
-          >
-            <QuantityWrap>
-              <QuantityIcons source={require('src/assets/icons/minus.png')} />
-            </QuantityWrap>
-          </QuantityButton>
-          <Quantity>{quantity}</Quantity>
-          <QuantityButton
-            onPress={() => {
-              handleAddItem({ id, name, price, ImageSRC })
-            }}
-          >
-            <QuantityWrap>
-              <QuantityIcons source={require('src/assets/icons/add.png')} />
-            </QuantityWrap>
-          </QuantityButton>
-        </QuantityContainer>
+        <QuantityView
+          price={price}
+          handleRemoveItem={handleRemoveItem}
+          handleAddItem={handleAddItem}
+          name={name}
+          id={id}
+          ImageSRC={ImageSRC}
+          quantity={quantity}
+        />
       )}
     </Container>
   )
 }
-
-const QuantityIcons = styled.Image`
-  width: 20px;
-  height: 16px;
-`
 
 const PriceWrap = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-`
-
-const QuantityWrap = styled(PriceWrap)`
-  background-color: white;
-  padding: 16px;
-  border-radius: 17px;
 `
 
 const AddItemButton = styled.TouchableOpacity`
@@ -99,8 +85,6 @@ const AddItemButton = styled.TouchableOpacity`
   border-radius: 17px;
 `
 
-const QuantityButton = styled.TouchableOpacity``
-
 const Image = styled.Image`
   width: 100%;
   height: 170px;
@@ -113,19 +97,6 @@ const Price = styled.Text`
   font-size: 17px;
   margin: 5px 0px;
   padding: 0px 5px;
-`
-
-const Quantity = styled(Price)``
-
-const QuantityContainer = styled.View`
-  width: 100%;
-  padding: 5px;
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: 17px;
 `
 
 const Name = styled.Text`
