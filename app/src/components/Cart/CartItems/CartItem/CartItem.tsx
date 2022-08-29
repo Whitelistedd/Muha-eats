@@ -30,10 +30,8 @@ export const CartItem: React.FC<CartItemProps> = ({
   }
 
   const handleRemoveItem = (item: FormatedMenuItemType) => {
-    if (quantity !== 0) {
-      dispatch(removeProduct(item))
-      setQuantity((prev) => prev - 1)
-    }
+    dispatch(removeProduct(item))
+    setQuantity((prev) => prev - 1)
   }
 
   return (
@@ -42,14 +40,15 @@ export const CartItem: React.FC<CartItemProps> = ({
       <Details>
         <About>
           <Name>{name}</Name>
-          <Price>{price}₽</Price>
+          <Price>{price * quantity}₽</Price>
         </About>
         <QuantityView
           buttonStyle={{
-            width: '15px',
-            height: '15px',
-            padding: '5px',
-            margin: '5px',
+            width: '23px',
+            height: '23px',
+            padding: '4px',
+            margin: '8px',
+            borderRadius: '5px',
           }}
           style={{ justifyContent: 'flex-start' }}
           price={price}
@@ -65,12 +64,21 @@ export const CartItem: React.FC<CartItemProps> = ({
   )
 }
 
-const Name = styled.Text``
+const Name = styled.Text`
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+`
 
-const Price = styled.Text``
+const Price = styled.Text`
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 17px;
+`
 
 const About = styled.View`
   display: flex;
+  flex: 1;
   flex-direction: row;
   justify-content: space-between;
 `
@@ -85,12 +93,16 @@ const Details = styled.View`
 const FoodImage = styled.Image`
   width: 80px;
   height: 80px;
-  border-radius: 20px;
+  border-radius: 15px;
 `
 
 const Container = styled.View`
   display: flex;
   flex-direction: row;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   flex: 1;
+  padding-bottom: 20px;
+  border: #bdbdbd5a;
+  border-width: 0px;
+  border-bottom-width: 2px;
 `

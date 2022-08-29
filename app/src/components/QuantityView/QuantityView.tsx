@@ -52,7 +52,6 @@ const Quantity = styled.Text<{
 
 const QuantityContainer = styled.View`
   width: 100%;
-  padding: 5px;
   height: 50px;
   display: flex;
   flex-direction: row;

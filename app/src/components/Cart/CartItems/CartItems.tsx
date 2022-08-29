@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAppSelector } from 'src/redux/store/store'
 import styled from 'styled-components/native'
 import { CartItem } from './CartItem/CartItem'
 
 export const CartItems: React.FC = () => {
   const cartItemsList = useAppSelector((state) => state.cartItems)
+
+  useEffect(() => {}, [cartItemsList])
 
   return (
     <Container>
@@ -24,11 +26,10 @@ export const CartItems: React.FC = () => {
 
 const Wrap = styled.View`
   height: 100%;
-  padding: 10px;
   flex: 1;
 `
 
-const Container = styled.ScrollView`
+const Container = styled.View`
   height: 100%;
   flex: 1;
 `

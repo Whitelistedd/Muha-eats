@@ -87,10 +87,10 @@ const AddItemButton = styled.TouchableOpacity`
 
 const Image = styled.Image`
   width: 100%;
-  height: 170px;
+  height: 150px;
   border-radius: 10px;
   background-color: white;
-  border-radius: 17px;
+  border-radius: 17px 0px 0px 200px;
 `
 
 const Price = styled.Text`
@@ -100,8 +100,7 @@ const Price = styled.Text`
 `
 
 const Name = styled.Text`
-  padding: 0px 5px;
-  font-size: 14px;
+  font-size: 16px;
   margin: 5px 0px;
 `
 
@@ -113,10 +112,11 @@ const About = styled.View`
 const Container = styled.View`
   padding: 0px;
   display: flex;
+  min-height: 270px;
   border-radius: 17px;
-  padding: 5px;
+  padding: 8px;
   margin-bottom: 13px;
-  width: 175px;
+  width: 165px;
   flex-direction: column;
   background-color: #f4f4f3;
   align-items: center;

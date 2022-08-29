@@ -9,6 +9,7 @@ import { CartButton } from 'src/components/RestaurantDetails/CartButton/CartButt
 import { useAppSelector } from 'src/redux/store/store'
 import { AnimationView } from 'src/components/AnimationView/AnimationView'
 import { GoBack } from 'src/components/GoBack/GoBack'
+import { PopUpButton } from 'src/components/PopUpButton/PopUpButton'
 
 const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({
   route,
@@ -17,6 +18,7 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({
   const { name, image, menuItems } = route.params
 
   const cartQuantity = useAppSelector((state) => state.quantity)
+  const cartTotal = useAppSelector((state) => state.total)
 
   return (
     <Container>
@@ -27,7 +29,12 @@ const RestaurantDetails: React.FC<RestaurantDetailsProps> = ({
         {cartQuantity !== 0 && (
           <Cart>
             <AnimationView endValue={60} animation={'height'} duration={300}>
-              <CartButton navigation={navigation} />
+              <PopUpButton
+                style={{ backgroundColor: '#2fb90d' }}
+                navigateTo={'Корзина'}
+                textList={[`В корзину ${cartQuantity}`, `${cartTotal} ₽`]}
+                navigation={navigation}
+              />
             </AnimationView>
           </Cart>
         )}

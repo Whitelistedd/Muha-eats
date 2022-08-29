@@ -7,14 +7,14 @@ import {
   UserCircleIcon,
 } from 'react-native-heroicons/solid'
 import { BottomNavProps } from './BottomNav.model'
-import { TouchableHighlight } from 'react-native-gesture-handler'
 import { themeType } from 'src/theme'
+import { TouchableOpacity } from 'react-native'
 
 const BottomNavList = [
-  { name: 'Home', icon: <HomeIcon color={'black'} /> },
-  { name: 'Orders', icon: <ReceiptTaxIcon color={'black'} /> },
-  { name: 'Cart', icon: <ShoppingBagIcon color={'black'} /> },
-  { name: 'Account', icon: <UserCircleIcon color={'black'} /> },
+  { name: 'Главное', icon: <HomeIcon color={'black'} /> },
+  { name: 'Заказы', icon: <ReceiptTaxIcon color={'black'} /> },
+  { name: 'Корзина', icon: <ShoppingBagIcon color={'black'} /> },
+  { name: 'Личное', icon: <UserCircleIcon color={'black'} /> },
 ]
 
 export const BottomNav: React.FC<BottomNavProps> = ({
@@ -24,7 +24,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   return (
     <Container className={`${className}`}>
       {BottomNavList.map((navItem, index) => (
-        <TouchableHighlight
+        <TouchableOpacity
           onPress={() => {
             navigation.navigate(`${navItem.name}`)
           }}
@@ -34,7 +34,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             {navItem.icon}
             <Title>{navItem.name}</Title>
           </NavItem>
-        </TouchableHighlight>
+        </TouchableOpacity>
       ))}
     </Container>
   )

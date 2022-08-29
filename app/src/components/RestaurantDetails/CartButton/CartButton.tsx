@@ -8,7 +8,7 @@ export const CartButton: React.FC<CartButtonProps> = ({ navigation }) => {
   const cartTotal = useAppSelector((state) => state.total)
 
   return (
-    <Container onPress={() => navigation.navigate('Cart')}>
+    <Container onPress={() => navigation.navigate('Корзина')}>
       <Text>В корзину {cartQuantity}</Text>
       <Text>₽{cartTotal}</Text>
     </Container>

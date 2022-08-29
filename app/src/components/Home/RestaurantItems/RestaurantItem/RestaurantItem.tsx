@@ -9,16 +9,29 @@ export const RestaurantItem: React.FC<RestaurantItemProps> = ({
   ImageSRC,
 }) => {
   return (
-    <Container>
-      <ImageWrap>
-        <HeartWrap>
-          <Heart color="white" size={20} />
-        </HeartWrap>
-        <Image source={{ uri: ImageSRC }} />
-      </ImageWrap>
-      <About>
-        <Name>{name}</Name>
-      </About>
+    <Container
+      style={[
+        {
+          shadowOffset: {
+            width: 0,
+            height: 0,
+          },
+          shadowOpacity: 0.2,
+          shadowRadius: 5,
+        },
+      ]}
+    >
+      <Wrap>
+        <ImageWrap>
+          <HeartWrap>
+            <Heart color="white" size={20} />
+          </HeartWrap>
+          <Image source={{ uri: ImageSRC }} />
+        </ImageWrap>
+        <About>
+          <Name>{name}</Name>
+        </About>
+      </Wrap>
     </Container>
   )
 }
@@ -45,12 +58,11 @@ const Name = styled.Text`
 const Image = styled.Image`
   min-height: 150px;
   width: 100%;
-  border-radius: 16px;
 `
 
 const About = styled.View`
   display: flex;
-  padding: 5px 0px;
+  padding: 15px 10px;
   justify-content: center;
 `
 
@@ -59,14 +71,17 @@ const ImageWrap = styled.View`
   position: relative;
 `
 
-const Container = styled.View<{ theme: themeType }>`
+const Wrap = styled.View<{ theme: themeType }>`
   background-color: ${({ theme }) => theme.secondaryBg};
   flex: 1;
   width: 90%;
   height: 100%;
   min-height: 180px;
-  border-radius: 16px;
+  border-radius: 10px;
+  overflow: hidden;
   margin: 10px 0px;
   margin-left: auto;
   margin-right: auto;
 `
+
+const Container = styled.View``

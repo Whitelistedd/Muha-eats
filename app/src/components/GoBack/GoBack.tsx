@@ -13,19 +13,20 @@ export const GoBack: React.FC<GoBackProps> = ({ navigation }) => {
 }
 
 const Arrow = styled.Image`
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
 `
 
-const Button = styled.TouchableOpacity`
-  padding: 5px;
-`
+const Button = styled.TouchableOpacity``
 
 const Container = styled.SafeAreaView`
   position: absolute;
-  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   top: 0;
-  margin: 50px 15px;
+  margin: 1px 15px;
   border-radius: 50%;
   z-index: 10;
 `

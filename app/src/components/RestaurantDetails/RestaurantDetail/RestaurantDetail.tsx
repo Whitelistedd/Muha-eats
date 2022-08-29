@@ -2,6 +2,7 @@ import styled from 'styled-components/native'
 import React from 'react'
 
 import { RestaurantDetailProps } from './RestaurantDetail.model'
+import { themeType } from 'src/theme'
 
 export const RestaurantDetail: React.FC<RestaurantDetailProps> = ({
   name,

@@ -41,7 +41,9 @@ const QuantityIcons = styled.Image<{
   height: ${(props) => (props.buttonStyle ? props.buttonStyle.height : '16px')};
 `
 
-const QuantityWrap = styled.View<{ buttonStyle?: { padding: string } }>`
+const QuantityWrap = styled.View<{
+  buttonStyle?: { padding: string; borderRadius: string }
+}>`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -51,7 +53,8 @@ const QuantityWrap = styled.View<{ buttonStyle?: { padding: string } }>`
     props.buttonStyle && props.buttonStyle.padding
       ? props.buttonStyle.padding
       : '16px'};
-  border-radius: 17px;
+  border-radius: ${(props) =>
+    props.buttonStyle ? props.buttonStyle.borderRadius : '17px'};
 `
 
 const Container = styled.TouchableOpacity``

@@ -5,6 +5,7 @@ const initialState: initialStateType = {
   cartItems: [],
   quantity: 0,
   total: 0,
+  deliveryMethod: 'Доставка',
 }
 
 const CartSlice = createSlice({
@@ -30,7 +31,6 @@ const CartSlice = createSlice({
         state.cartItems.push({ ...action.payload, quantity: 1 })
         state.quantity += 1
         state.total += action.payload.price
-        console.log(`not a duplicate `)
       }
     },
     removeProduct: (state, action) => {
@@ -50,10 +50,19 @@ const CartSlice = createSlice({
           state.total -= item.price
         }
       })
-      console.log(inCartItem)
+    },
+    changeDeliveryMethod: (state, action) => {
+      if (action.payload === state.deliveryMethod) return
+      state.deliveryMethod = action.payload
+      if (action.payload === 'Доставка') {
+        state.total += 500
+      } else {
+        state.total -= 500
+      }
     },
   },
 })
 
-export const { addProduct, removeProduct } = CartSlice.actions
+export const { addProduct, removeProduct, changeDeliveryMethod } =
+  CartSlice.actions
 export default CartSlice.reducer

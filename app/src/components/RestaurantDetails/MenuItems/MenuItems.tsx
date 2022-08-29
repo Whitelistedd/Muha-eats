@@ -3,8 +3,13 @@ import React from 'react'
 import { MenuItem } from './MenuItem/MenuItem'
 import { MenuItemsProps } from './MenuItems.model'
 import { urlFor } from '../../../SanityClient'
+import { useAppSelector } from 'src/redux/store/store'
 
 export const MenuItems: React.FC<MenuItemsProps> = ({ MenuItemList }) => {
+  const cartItems = useAppSelector((state) => state.cartItems)
+
+  console.log(cartItems)
+
   return (
     <Container>
       <ScrollView>
@@ -26,7 +31,7 @@ export const MenuItems: React.FC<MenuItemsProps> = ({ MenuItemList }) => {
 
 const Wrap = styled.View`
   padding: 10px;
-  justify-content: space-between;
+  justify-content: space-around;
   display: flex;
   height: 100%;
   flex-direction: row;

@@ -17,10 +17,10 @@ export default function RootNavigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" screenOptions={screenOptions}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Orders" component={Orders} />
+        <Stack.Screen name="Главное" component={Home} />
+        <Stack.Screen name="Заказы" component={Orders} />
         <Stack.Screen name="RestaurantDetails" component={RestaurantDetails} />
-        <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen name="Корзина" component={Cart} />
       </Stack.Navigator>
     </NavigationContainer>
   )
