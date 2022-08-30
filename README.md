@@ -1,7 +1,7 @@
-![image1](https://imgur.com/9oo5Ajj)
-![image2](https://imgur.com/9BkK8y8)
-![image3](https://imgur.com/uqc9YAb)
-![image4](https://imgur.com/fyMs6hK)
+[Imgur](https://imgur.com/9oo5Ajj)
+[Imgur](https://imgur.com/9BkK8y8)
+[Imgur](https://imgur.com/uqc9YAb)
+[Imgur](https://imgur.com/fyMs6hK)
 
 # My Universal React Project
 
