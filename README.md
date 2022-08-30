@@ -1,5 +1,7 @@
-![image1](https://i.imgur.com/b8qNdJV.png)
-![image2](https://imgur.com/e3WqMRK.png)
+![image1](https://imgur.com/9oo5Ajj)
+![image2](https://imgur.com/9BkK8y8)
+![image3](https://imgur.com/uqc9YAb)
+![image4](https://imgur.com/fyMs6hK)
 
 # My Universal React Project
 
