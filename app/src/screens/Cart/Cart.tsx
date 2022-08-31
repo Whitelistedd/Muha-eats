@@ -1,63 +1,84 @@
 import styled from 'styled-components/native'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { themeType } from 'src/theme'
 import { CartProps } from './Cart.model'
 import { CartItems } from 'src/components/Cart/CartItems/CartItems'
 import { useAppSelector } from 'src/redux/store/store'
 import Lottie from 'lottie-react-native'
-import { Text } from 'react-native'
+import BottomSheet from '@gorhom/bottom-sheet'
 import { GoBack } from 'src/components/GoBack/GoBack'
 import { PopUpButton } from 'src/components/PopUpButton/PopUpButton'
 import { DeliveryMethods } from 'src/components/Cart/DeliveryMethods/DeliveryMethods'
+import { PaymentForm } from 'src/components/Cart/PaymentForm/PaymentForm'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 const Cart: React.FC<CartProps> = ({ navigation }) => {
+  const [showPaymentForm, setShowPaymentForm] = useState(false)
+  const bottomSheetRef = useRef<BottomSheet>(null)
+
   const cartQuantity = useAppSelector((state) => state.quantity)
   const cartTotal = useAppSelector((state) => state.total)
   const SelectedDeliveryMethod = useAppSelector((state) => state.deliveryMethod)
 
+  const handleOpenModal = () => {
+    bottomSheetRef.current?.snapToIndex(0)
+  }
+
+  useEffect(() => {
+    console.log(showPaymentForm)
+  }, [showPaymentForm])
+
   return (
-    <Container>
-      <Wrap>
-        <GoBack navigation={navigation} />
-        <NavBar>
-          <Title>Корзино</Title>
-        </NavBar>
-        {cartQuantity !== 0 ? (
-          <>
-            <ScrollView>
-              <SubTitle>Заказ</SubTitle>
-              <CartItems />
-              <CostWrap>
-                <Cost>{SelectedDeliveryMethod}</Cost>
-                <Cost>{SelectedDeliveryMethod === 'Доставка' ? 500 : 0}₽</Cost>
-              </CostWrap>
-              <SubTitle>Получениe</SubTitle>
-              <DeliveryMethods />
-            </ScrollView>
-            <PopUpButton
-              style={{ backgroundColor: '#2fb90d' }}
-              textList={['Оформить Доставку', `${cartTotal} ₽`]}
-              navigateTo={'Корзина'}
-              navigation={navigation}
-            />
-          </>
-        ) : (
-          <>
-            <EmptyCartAnimation>
-              <Lottie
-                source={require('src/assets/animation/emptyBox.json')}
-                autoPlay
-                loop
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Container>
+        <Wrap>
+          <GoBack navigation={navigation} />
+          <NavBar>
+            <Title>Корзино</Title>
+          </NavBar>
+          {cartQuantity !== 0 ? (
+            <>
+              <ScrollView>
+                <SubTitle>Заказ</SubTitle>
+                <CartItems />
+                <CostWrap>
+                  <Cost>{SelectedDeliveryMethod}</Cost>
+                  <Cost>
+                    {SelectedDeliveryMethod === 'Доставка' ? 500 : 0}₽
+                  </Cost>
+                </CostWrap>
+                <SubTitle>Получениe</SubTitle>
+                <DeliveryMethods />
+              </ScrollView>
+              <PopUpButton
+                onPress={handleOpenModal}
+                style={{ backgroundColor: '#2fb90d' }}
+                textList={['Оформить Доставку', `${cartTotal} ₽`]}
+                navigation={navigation}
               />
-            </EmptyCartAnimation>
-            <Title>Корзино пуста</Title>
-            <EmptyCartButton onPress={() => navigation.navigate('Главное')}>
-              <EmptyCartText>Вернуться к выбору товаров </EmptyCartText>
-            </EmptyCartButton>
-          </>
-        )}
-      </Wrap>
-    </Container>
+              <PaymentForm
+                bottomSheetRef={bottomSheetRef}
+                show={showPaymentForm}
+              />
+            </>
+          ) : (
+            <>
+              <EmptyCartAnimation>
+                <Lottie
+                  source={require('src/assets/animation/emptyBox.json')}
+                  autoPlay
+                  loop
+                />
+              </EmptyCartAnimation>
+              <Title>Корзино пуста</Title>
+              <EmptyCartButton onPress={() => navigation.navigate('Главное')}>
+                <EmptyCartText>Вернуться к выбору товаров </EmptyCartText>
+              </EmptyCartButton>
+            </>
+          )}
+        </Wrap>
+      </Container>
+    </GestureHandlerRootView>
   )
 }
 

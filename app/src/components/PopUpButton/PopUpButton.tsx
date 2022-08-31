@@ -7,14 +7,17 @@ export const PopUpButton: React.FC<PopUpButtonProps> = ({
   navigateTo,
   textList,
   style,
+  onPress,
 }) => {
   return (
     <Container
       style={{ ...style }}
-      onPress={() => navigation.navigate(navigateTo)}
+      onPress={() => {
+        navigateTo ? navigation.navigate(navigateTo) : onPress()
+      }}
     >
-      {textList.map((text) => (
-        <Text>{text}</Text>
+      {textList.map((text, index) => (
+        <Text key={text + index}>{text}</Text>
       ))}
     </Container>
   )
@@ -34,4 +37,5 @@ const Container = styled.TouchableOpacity`
   justify-content: space-between;
   padding: 0px 10px;
   margin: 5px 10px 0px 10px;
+  z-index: 0;
 `
