@@ -90,7 +90,6 @@ const Image = styled.Image`
   height: 150px;
   border-radius: 10px;
   background-color: white;
-  border-radius: 17px 0px 0px 200px;
 `
 
 const Price = styled.Text`

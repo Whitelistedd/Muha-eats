@@ -11,8 +11,9 @@ export const CartItems: React.FC = () => {
   return (
     <Container>
       <Wrap>
-        {cartItemsList.map((cartItem) => (
+        {cartItemsList.map((cartItem, index) => (
           <CartItem
+            key={cartItem + `${index}`}
             id={cartItem.id}
             name={cartItem.name}
             price={cartItem.price}

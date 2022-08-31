@@ -4,5 +4,6 @@ export interface PopUpButtonProps {
   navigation: NavigationProp<ParamListBase>
   textList: string[]
   style?: any
-  navigateTo: string
+  navigateTo?: string
+  onPress: () => void
 }

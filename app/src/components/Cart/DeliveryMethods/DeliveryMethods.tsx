@@ -32,6 +32,7 @@ export const DeliveryMethods: React.FC = () => {
     <Container>
       {DeliveryMethodList.map((method, index) => (
         <DeliveryMethod
+          key={method + `${index}`}
           handleDeliveryChange={handleDeliveryChange}
           SelectedDeliveryMethod={SelectedDeliveryMethod}
           deliveryType={method.deliveryType}
