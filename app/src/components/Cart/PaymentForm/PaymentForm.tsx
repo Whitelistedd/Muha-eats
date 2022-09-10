@@ -1,13 +1,25 @@
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Devider } from 'src/components/Devider/Devider'
+import { PopUpButton } from 'src/components/PopUpButton/PopUpButton'
+import { useAppSelector } from 'src/redux/store/store'
 import { themeType } from 'src/theme'
 import styled from 'styled-components/native'
+import { DeliveryMethods } from '../DeliveryMethods/DeliveryMethods'
+import { LocationButton } from '../LocationButton/LocationButton'
+import { OrderButton } from '../OrderButton/OrderButton'
+import { PaymentMethods } from '../PaymentMethods/PaymentMethods'
 import { PaymentFormProps } from './PaymentForm.model'
 
 export const PaymentForm: React.FC<PaymentFormProps> = ({
   show,
   bottomSheetRef,
+  navigation,
 }) => {
+  const cartTotal = useAppSelector((state) => state.total)
+
+  useEffect(() => {}, [])
+
   return (
     <Container
       backgroundStyle={{ backgroundColor: '#EDEDED' }}
@@ -23,13 +35,28 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
         elevation: 24,
       }}
       ref={bottomSheetRef}
-      snapPoints={[400]}
+      snapPoints={[320]}
       enablePanDownToClose={true}
       index={-1}
     >
       <Wrap>
-        <Title>w</Title>
+        <LocationButton style={{ marginBottom: 15 }} />
+        <DeliveryMethods />
+        <PaymentMethods />
+        <PopUpButton
+          textList={['Заказать', `${cartTotal} ₽`]}
+          style={{
+            backgroundColor: '#2fb90d',
+
+            marginRight: 0,
+            marginLeft: 0,
+          }}
+          navigation={navigation}
+          onPress={() => {}}
+          navigateTo={'Done'}
+        />
       </Wrap>
+      {/* <OrderButton /> */}
     </Container>
   )
 }
@@ -37,7 +64,8 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
 const Title = styled.Text``
 
 const Wrap = styled(BottomSheetView)<{ theme: themeType }>`
-  height: 400px;
+  height: 100%;
+  padding: 0px 20px 23px 20px;
   background-color: ${(props) => props.theme.bg};
 `
 

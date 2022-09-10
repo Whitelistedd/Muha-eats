@@ -11,6 +11,7 @@ import { PopUpButton } from 'src/components/PopUpButton/PopUpButton'
 import { DeliveryMethods } from 'src/components/Cart/DeliveryMethods/DeliveryMethods'
 import { PaymentForm } from 'src/components/Cart/PaymentForm/PaymentForm'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Cart: React.FC<CartProps> = ({ navigation }) => {
   const [showPaymentForm, setShowPaymentForm] = useState(false)
@@ -50,15 +51,25 @@ const Cart: React.FC<CartProps> = ({ navigation }) => {
                 <SubTitle>Получениe</SubTitle>
                 <DeliveryMethods />
               </ScrollView>
-              <PopUpButton
-                onPress={handleOpenModal}
-                style={{ backgroundColor: '#2fb90d' }}
-                textList={['Оформить Доставку', `${cartTotal} ₽`]}
-                navigation={navigation}
-              />
+              {showPaymentForm ? (
+                <PopUpButton
+                  textList={['Заказать', `${cartTotal} ₽`]}
+                  style={{ backgroundColor: '#2fb90d', zIndex: 55 }}
+                  navigation={navigation}
+                  navigateTo={'Done'}
+                />
+              ) : (
+                <PopUpButton
+                  onPress={handleOpenModal}
+                  style={{ backgroundColor: '#2fb90d' }}
+                  textList={['Оформить Доставку', `${cartTotal} ₽`]}
+                  navigation={navigation}
+                />
+              )}
               <PaymentForm
                 bottomSheetRef={bottomSheetRef}
                 show={showPaymentForm}
+                navigation={navigation}
               />
             </>
           ) : (
